@@ -58,7 +58,7 @@ public class MHMM
 
 	
     
-    static final int port = 9999;
+    static final int port = 9998;
  
     public static void main(String[] args) throws IOException, InterruptedException 
     {
@@ -385,7 +385,38 @@ public class MHMM
             }
             System.out.println("\n*************************************\n");
         }
-        
+
+		// convolution_index calculates the overlapping similarity of two strings
+		// Notice that p_src is the string in the vocabulariy set, and p_dest is the
+		// the actual string that is heard.
+		public static float convolution_index(String p_src, String p_dest)
+    	{
+		    int len_src = p_src.length();
+		    int len_dest = p_dest.length();
+		    int steps = 2*len_src + len_dest;
+		    int i,c;
+		    float retval = 0;
+	   
+		    for(i=0; i<steps; ++i) {
+		        int cur_conv_index = 0;
+		        int start_s = Math.max(0, (len_src - 1 - i));
+		        int start_d = Math.max(0, i - len_src + 1);
+		        while(start_s < len_src && start_d < len_dest) {
+		            //System.out.println(p_src.substring(start_s,start_s+1) + " == " + p_dest.substring(start_d,start_d+1));
+		            if(p_src.substring(start_s,start_s+1).equals(p_dest.substring(start_d,start_d+1))) {
+		                ++cur_conv_index;
+		            }
+		            ++start_s;
+		            ++start_d;
+		        }
+		        if(cur_conv_index > retval)
+		            retval = cur_conv_index;
+		    }
+			System.out.println("The convolution index value between " + p_src + " and " + p_dest + " is " + retval);
+		    return retval/len_dest;       
+		}
+
+
         public static Hashtable<String, Hashtable<String, Float>> 
         	confustionGen(String[] obs, String[] vocalbularySet) throws IOException, InterruptedException
         {
@@ -398,8 +429,7 @@ public class MHMM
         	//String[] obsPhonemes = {"anju:@L d'arEl", "m'eIbi: l'eIt3"};
         	String[] vocalPhonemes;
         	
-        	obsPhonemes = phonemeConversion(obs);
-        	
+        	obsPhonemes = phonemeConversion(obs);       	
         	vocalPhonemes = phonemeConversion(vocalbularySet);        	
         	
 /*        	for (String temp : obsPhonemes)
@@ -428,19 +458,27 @@ public class MHMM
         	for (String obsWord : obs) {
         		Hashtable<String, Float> c = new Hashtable<String, Float>();
         		// get rid of the utility 'phonemes'
-    			String obsPhoneme = obsPhonemes[i].replaceAll("[',%=_:|]", "");
+				// Notice here that getting rid of space is quite useful, wheraz other utility 
+				// phonemes such as # is not so clear.
+    			String obsPhoneme = obsPhonemes[i].replaceAll("[',%=_:| ]", "");
         		j = 0;
         		for (String volWord : vocalbularySet) {
         			float similarityIndex;
         			// get rid of the utility 'phonemes'
-        			String vocalPhoneme = vocalPhonemes[j].replaceAll("[',%=_:|]", "");
+        			String vocalPhoneme = vocalPhonemes[j].replaceAll("[',%=_:| ]", "");
         			int LDistance = computeLevenshteinDistance(obsPhoneme, vocalPhoneme);
         			//int wordLength = obsWord.length();
         			//int wordLength = obsPhonemes[i].length();
         			int wordLength = obsPhoneme.length();
         			//System.out.println("vocal " + vocalPhonemes[j] + 
         			//		" LDistance " + LDistance + " wordLength " + wordLength);
-        			similarityIndex = ( LDistance <= wordLength ? (1 - ((float)LDistance/wordLength)) : 0);
+        			//similarityIndex = ( LDistance <= wordLength ? (1 - ((float)LDistance/wordLength)) : 0);
+                    similarityIndex = 1 - ((float)LDistance/(Math.max(obsPhoneme.length(), vocalPhoneme.length())));
+					// --------------------------------------------------------
+					// Modified for adding convolution index
+					float conv = convolution_index(vocalPhoneme, obsPhoneme);
+					similarityIndex *= conv;
+					// --------------------------------------------------------
         			c.put(volWord, similarityIndex);
         			j++;
         		}

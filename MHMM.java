@@ -74,81 +74,81 @@ public class MHMM
         //String[] actualVocabularySet = new String[] {oxyg, asys, elec, epi};
         String[] actualVocabularySet = new String[] {darrell, later};
  
-        Hashtable<String, Float> start_probability = new Hashtable<String, Float>();
+        Hashtable<String, Double> start_probability = new Hashtable<String, Double>();
         /*
-        start_probability.put(HEALTHY, 0.6f);
-        start_probability.put(FEVER, 0.4f);*/
+        start_probability.put(HEALTHY, 0.6d);
+        start_probability.put(FEVER, 0.4d);*/
         
-        start_probability.put(ZERO, 0.2f);
-        start_probability.put(ONE, 0.2f);
-        start_probability.put(TWO, 0.2f);
-        start_probability.put(THREE, 0.2f);
-        start_probability.put(FOUR, 0.2f);
+        start_probability.put(ZERO, 0.2d);
+        start_probability.put(ONE, 0.2d);
+        start_probability.put(TWO, 0.2d);
+        start_probability.put(THREE, 0.2d);
+        start_probability.put(FOUR, 0.2d);
  
 /*        // transition_probability
-        Hashtable<String, Hashtable<String, Float>> transition_probability = 
-        		new Hashtable<String, Hashtable<String, Float>>();
-        Hashtable<String, Float> t1 = new Hashtable<String, Float>();
-        t1.put(HEALTHY, 0.7f);
-        t1.put(FEVER, 0.3f);
-        Hashtable<String, Float> t2 = new Hashtable<String, Float>();
-        t2.put(HEALTHY, 0.4f);
-        t2.put(FEVER, 0.6f);
+        Hashtable<String, Hashtable<String, Double>> transition_probability = 
+        		new Hashtable<String, Hashtable<String, Double>>();
+        Hashtable<String, Double> t1 = new Hashtable<String, Double>();
+        t1.put(HEALTHY, 0.7d);
+        t1.put(FEVER, 0.3d);
+        Hashtable<String, Double> t2 = new Hashtable<String, Double>();
+        t2.put(HEALTHY, 0.4d);
+        t2.put(FEVER, 0.6d);
         transition_probability.put(HEALTHY, t1);
         transition_probability.put(FEVER, t2);
  
         // emission_probability
-        Hashtable<String, Hashtable<String, Float>> emission_probability = 
-        		new Hashtable<String, Hashtable<String, Float>>();
-        Hashtable<String, Float> e1 = new Hashtable<String, Float>();
-        e1.put(CUT, 0.1f);            
-        e1.put(HAT, 0.4f); 
-        e1.put(MAD, 0.5f);
-        Hashtable<String, Float> e2 = new Hashtable<String, Float>();
-        e2.put(CUT, 0.6f);            
-        e2.put(HAT, 0.3f); 
-        e2.put(MAD, 0.1f);
+        Hashtable<String, Hashtable<String, Double>> emission_probability = 
+        		new Hashtable<String, Hashtable<String, Double>>();
+        Hashtable<String, Double> e1 = new Hashtable<String, Double>();
+        e1.put(CUT, 0.1d);            
+        e1.put(HAT, 0.4d); 
+        e1.put(MAD, 0.5d);
+        Hashtable<String, Double> e2 = new Hashtable<String, Double>();
+        e2.put(CUT, 0.6d);            
+        e2.put(HAT, 0.3d); 
+        e2.put(MAD, 0.1d);
         emission_probability.put(HEALTHY, e1);
         emission_probability.put(FEVER, e2);*/
 
         // transition_probability
-        Hashtable<String, Hashtable<String, Float>> transition_probability = 
-        		new Hashtable<String, Hashtable<String, Float>>();
-        Hashtable<String, Float> t0 = new Hashtable<String, Float>();
-        t0.put(ZERO, (1.0f/3.0f));
-        t0.put(ONE, (1.0f/3.0f));
-        t0.put(TWO, (1.0f/3.0f));
-        Hashtable<String, Float> t1 = new Hashtable<String, Float>();
-        t1.put(ONE, 0.5f);
-        t1.put(TWO, 0.5f);
-        Hashtable<String, Float> t2 = new Hashtable<String, Float>();
-        t2.put(TWO, (1.0f/3.0f));
-        t2.put(THREE, (1.0f/3.0f));
-        t2.put(FOUR, (1.0f/3.0f));
+        Hashtable<String, Hashtable<String, Double>> transition_probability = 
+        		new Hashtable<String, Hashtable<String, Double>>();
+        Hashtable<String, Double> t0 = new Hashtable<String, Double>();
+        t0.put(ZERO, (1.0f/3.0d));
+        t0.put(ONE, (1.0f/3.0d));
+        t0.put(TWO, (1.0f/3.0d));
+        Hashtable<String, Double> t1 = new Hashtable<String, Double>();
+        t1.put(ONE, 0.5d);
+        t1.put(TWO, 0.5d);
+        Hashtable<String, Double> t2 = new Hashtable<String, Double>();
+        t2.put(TWO, (1.0f/3.0d));
+        t2.put(THREE, (1.0f/3.0d));
+        t2.put(FOUR, (1.0f/3.0d));
         transition_probability.put(ZERO, t0);
         transition_probability.put(ONE, t1);
         transition_probability.put(TWO, t2);
  
         // emission_probability
-        Hashtable<String, Hashtable<String, Float>> emission_probability = 
-        		new Hashtable<String, Hashtable<String, Float>>();
-        Hashtable<String, Float> e0 = new Hashtable<String, Float>();
-        e0.put(OXYG, 0.5f);            
-        e0.put(DEFI, 0.5f);
-        Hashtable<String, Float> e1 = new Hashtable<String, Float>();
-        e1.put(FLAT, 0.5f);            
-        e1.put(ASYS, 0.5f); 
-        Hashtable<String, Float> e2 = new Hashtable<String, Float>();
-        e2.put(SHOC, (1.0f/3.0f));            
-        e2.put(ELEC, (1.0f/3.0f)); 
-        e2.put(OXYG, (1.0f/3.0f));
-        Hashtable<String, Float> e3 = new Hashtable<String, Float>();
-        e3.put(INTR, (1.0f/3.0f));            
-        e3.put(PUSH, (1.0f/3.0f)); 
-        e3.put(DEFI, (1.0f/3.0f));
-        Hashtable<String, Float> e4 = new Hashtable<String, Float>();
-        e4.put(EPI, 0.5f);            
-        e4.put(AMIO, 0.5f); 
+        Hashtable<String, Hashtable<String, Double>> emission_probability = 
+        		new Hashtable<String, Hashtable<String, Double>>();
+        Hashtable<String, Double> e0 = new Hashtable<String, Double>();
+        e0.put(OXYG, 0.5d);            
+        e0.put(DEFI, 0.5d);
+        Hashtable<String, Double> e1 = new Hashtable<String, Double>();
+        e1.put(FLAT, 0.5d);            
+        e1.put(ASYS, 0.5d); 
+        Hashtable<String, Double> e2 = new Hashtable<String, Double>();
+        e2.put(SHOC, (1.0f/3.0d));            
+        e2.put(ELEC, (1.0f/3.0d)); 
+        e2.put(OXYG, (1.0f/3.0d));
+        Hashtable<String, Double> e3 = new Hashtable<String, Double>();
+        e3.put(INTR, (1.0f/3.0d));            
+        e3.put(PUSH, (1.0f/3.0d)); 
+        e3.put(DEFI, (1.0f/3.0d));
+        Hashtable<String, Double> e4 = new Hashtable<String, Double>();
+        e4.put(EPI, 0.5d);            
+        e4.put(AMIO, 0.5d); 
         emission_probability.put(ZERO, e0);
         emission_probability.put(ONE, e1);
         emission_probability.put(TWO, e2);
@@ -158,26 +158,26 @@ public class MHMM
 		//confusion_probability
         /*
         // Hardcode confusion_probability
-		Hashtable<String, Hashtable<String, Float>> confusion_probability = 
-			new Hashtable<String, Hashtable<String, Float>>();
-		Hashtable<String, Float> c1 = new Hashtable<String, Float>();
+		Hashtable<String, Hashtable<String, Double>> confusion_probability = 
+			new Hashtable<String, Hashtable<String, Double>>();
+		Hashtable<String, Double> c1 = new Hashtable<String, Double>();
 		c1.put(CUT, 0.0f);
-		c1.put(HAT, (1.0f/3.0f));
-		c1.put(MAD, (2.0f/3.0f));
-		Hashtable<String, Float> c2 = new Hashtable<String, Float>();
-		c2.put(CUT, (1.0f/3.0f));
-		c2.put(HAT, (2.0f/3.0f));
+		c1.put(HAT, (1.0f/3.0d));
+		c1.put(MAD, (2.0f/3.0d));
+		Hashtable<String, Double> c2 = new Hashtable<String, Double>();
+		c2.put(CUT, (1.0f/3.0d));
+		c2.put(HAT, (2.0f/3.0d));
 		c2.put(MAD, 0.0f);
-		Hashtable<String, Float> c3 = new Hashtable<String, Float>();
-		c3.put(CUT, (2.0f/3.0f));
-		c3.put(HAT, (2.0f/3.0f));
-		c3.put(MAD, (1.0f/3.0f));
+		Hashtable<String, Double> c3 = new Hashtable<String, Double>();
+		c3.put(CUT, (2.0f/3.0d));
+		c3.put(HAT, (2.0f/3.0d));
+		c3.put(MAD, (1.0f/3.0d));
 		confusion_probability.put(MAC, c1);
 		confusion_probability.put(HIT, c2);
 		confusion_probability.put(CAT, c3);*/
 
         
-/*        Hashtable<String, Hashtable<String, Float>> confusion_probability =
+/*        Hashtable<String, Hashtable<String, Double>> confusion_probability =
         		confustionGen(actualVocabularySet, vocabularySet);*/
 /*
         System.out.println("LD is " + computeLevenshteinDistance("0ksIdZ@n", "0pS@n"));*/
@@ -222,10 +222,10 @@ public class MHMM
             }
             System.out.println(Arrays.toString(wordSeq));
 	        
-	        /*Hashtable<String, Hashtable<String, Float>> confusion_probability =
+	        /*Hashtable<String, Hashtable<String, Double>> confusion_probability =
 	        		confustionGen(actualVocSet, vocabularySet);*/
 	        
-	        Hashtable<String, Hashtable<String, Float>> confusion_probability =
+	        Hashtable<String, Hashtable<String, Double>> confusion_probability =
 	        		confustionGen(wordSeq, vocabularySet);
             /*
 	        forward_viterbi(actualVocSet,
@@ -256,17 +256,17 @@ public class MHMM
         }
  
         public static void forward_viterbi(String[] actualObs, String[] obs, String[] states,
-                        Hashtable<String, Float> start_p,
-                        Hashtable<String, Hashtable<String, Float>> trans_p,
-                        Hashtable<String, Hashtable<String, Float>> emit_p,
-			Hashtable<String, Hashtable<String, Float>> conf_p)
+                        Hashtable<String, Double> start_p,
+                        Hashtable<String, Hashtable<String, Double>> trans_p,
+                        Hashtable<String, Hashtable<String, Double>> emit_p,
+			Hashtable<String, Hashtable<String, Double>> conf_p)
         {
 
         	int state_num = states.length;
         	//int obs_num = obs.length;
         	int obs_num = actualObs.length;
         	//V[t][i] stores the overall largest probability ending at the state of i at time t
-        	float V[][] = new float[obs_num+1][state_num];
+        	double V[][] = new double[obs_num+1][state_num];
         	//B[t][i]  stores the last source state corresponding to the V[t][i]
         	int B[][] = new int[obs_num+1][state_num];
         	//X[t][i] stores the word that has been chosen corresponding to the V[t][i]
@@ -275,7 +275,8 @@ public class MHMM
         	int m = 0;
         	for (String state : states)
         	{
-        		V[0][m] = start_p.get(state);
+        		//V[0][m] = start_p.get(state);
+                V[0][m] = Math.log(start_p.get(state));
         		B[0][m] = m;
         		X[0][m] = "@";
         		m++;
@@ -293,37 +294,56 @@ public class MHMM
                 {
                 	i++;
                     int Smax = -1;
-                    float Pmax = 0;
+                    //double Pmax = 0;
+                    double Pmax = Double.NEGATIVE_INFINITY;
                     String v_word = "";	
-
-                    float v_prob = 1;       
+                    double v_prob = 1;       
 			
                     // x is the current accurate observation (word)	
                     int x = -1;
                     for (String word : obs)		
                     {
                     	x++;
-                    	// j is the previous state
-                    	int j = -1; 
-                    	for (String source_state : states)
-                    	{
-                    		j++;
-                    		float p;
-                    		if(emit_p.get(next_state) == null || trans_p.get(source_state) == null ||
-                    				emit_p.get(next_state).get(word) == null || trans_p.get(source_state).get(next_state) == null)
-                    			p = 0;
-                    		else
-	                    		p = emit_p.get(next_state).get(word) * 
-	                    				trans_p.get(source_state).get(next_state) * conf_p.get(input).get(word);
-                    		v_prob = V[t-1][j] * p;
-						
-                    		if (v_prob >= Pmax)
-                    		{
-                    			Pmax = v_prob;
-                    			Smax = j;
-                    			v_word = word;
-                    		}
-                    	}
+                        if (t == 1) {
+                            if (emit_p.get(next_state) == null || emit_p.get(next_state).get(word) == null) {
+                                v_prob = Double.NEGATIVE_INFINITY;
+                            } else {
+                                v_prob = Math.log(start_p.get(next_state)) + Math.log(conf_p.get(input).get(word))
+                                    + Math.log(emit_p.get(next_state).get(word));
+                            }
+                            if (v_prob >= Pmax) {
+                                Pmax = v_prob;
+                                Smax = i;
+                                v_word = word;
+                            }
+                        } else {
+                        	// j is the previous state
+                        	int j = -1; 
+                        	for (String source_state : states)
+                        	{
+                        		j++;
+                        		double p;
+                        		if (emit_p.get(next_state) == null || trans_p.get(source_state) == null ||
+                        				emit_p.get(next_state).get(word) == null || trans_p.get(source_state).get(next_state) == null)
+                        			//p = 0;
+                                    p = Double.NEGATIVE_INFINITY;
+                        		else
+    	                    		//p = emit_p.get(next_state).get(word) * 
+    	                    		//		trans_p.get(source_state).get(next_state) * conf_p.get(input).get(word);
+     	                    		p = Math.log(emit_p.get(next_state).get(word)) +  
+    	                    				Math.log(trans_p.get(source_state).get(next_state)) + Math.log(conf_p.get(input).get(word));
+ 
+                        		//v_prob = V[t-1][j] * p;
+                                v_prob= V[t-1][j] + p;
+    						
+                        		if (v_prob >= Pmax)
+                        		{
+                        			Pmax = v_prob;
+                        			Smax = j;
+                        			v_word = word;
+                        		}
+                        	}
+                        }
                     }
                     V[t][i] = Pmax;
                     B[t][i] = Smax;
@@ -331,13 +351,13 @@ public class MHMM
                 }
             }
  
-            float total = 0;
+            double total = 0;
             String argmax = "";
-            float valmax = 0;
+            double valmax = 0;
  
-            float prob;
+            double prob;
             String v_path;
-            float v_prob;
+            double v_prob;
 	
             /*
             for (int n = 0; n < obs_num+1; n++)
@@ -352,7 +372,8 @@ public class MHMM
 			*/
 		
             int Smax = -1;
-            float pMax = 0;
+            //double pMax = 0;
+            double pMax = Double.NEGATIVE_INFINITY;
             for (int n = 0; n < state_num; n++ ) 
             {
             	if (V[obs_num][n] >= pMax) {
@@ -389,13 +410,13 @@ public class MHMM
 		// convolution_index calculates the overlapping similarity of two strings
 		// Notice that p_src is the string in the vocabulariy set, and p_dest is the
 		// the actual string that is heard.
-		public static float convolution_index(String p_src, String p_dest)
+		public static double convolution_index(String p_src, String p_dest)
     	{
 		    int len_src = p_src.length();
 		    int len_dest = p_dest.length();
 		    int steps = 2*len_src + len_dest;
 		    int i,c;
-		    float retval = 0;
+		    double retval = 0;
 	   
 		    for(i=0; i<steps; ++i) {
 		        int cur_conv_index = 0;
@@ -417,7 +438,7 @@ public class MHMM
 		}
 
 
-        public static Hashtable<String, Hashtable<String, Float>> 
+        public static Hashtable<String, Hashtable<String, Double>> 
         	confustionGen(String[] obs, String[] vocalbularySet) throws IOException, InterruptedException
         {
         	/*
@@ -445,7 +466,7 @@ public class MHMM
         	//System.out.println("computeLevenshteinDistance mac and mad "  + computeLevenshteinDistance(obsPhonemes[0], vocalPhonemes[0]));
         	
         	/*
-    		Hashtable<String, Float> c3 = new Hashtable<String, Float>();
+    		Hashtable<String, Double> c3 = new Hashtable<String, Double>();
     		c3.put(CUT, (2.0f/3.0f));
     		c3.put(HAT, (2.0f/3.0f));
     		c3.put(MAD, (1.0f/3.0f));
@@ -453,17 +474,17 @@ public class MHMM
         	
         	int i = 0;
         	int j;
-    		Hashtable<String, Hashtable<String, Float>> confusion_probability = 
-    				new Hashtable<String, Hashtable<String, Float>>();
+    		Hashtable<String, Hashtable<String, Double>> confusion_probability = 
+    				new Hashtable<String, Hashtable<String, Double>>();
         	for (String obsWord : obs) {
-        		Hashtable<String, Float> c = new Hashtable<String, Float>();
+        		Hashtable<String, Double> c = new Hashtable<String, Double>();
         		// get rid of the utility 'phonemes'
 				// Notice here that getting rid of space is quite useful, wheraz other utility 
 				// phonemes such as # is not so clear.
     			String obsPhoneme = obsPhonemes[i].replaceAll("[',%=_:| ]", "");
         		j = 0;
         		for (String volWord : vocalbularySet) {
-        			float similarityIndex;
+        			double similarityIndex;
         			// get rid of the utility 'phonemes'
         			String vocalPhoneme = vocalPhonemes[j].replaceAll("[',%=_:| ]", "");
         			int LDistance = computeLevenshteinDistance(obsPhoneme, vocalPhoneme);
@@ -472,11 +493,11 @@ public class MHMM
         			int wordLength = obsPhoneme.length();
         			//System.out.println("vocal " + vocalPhonemes[j] + 
         			//		" LDistance " + LDistance + " wordLength " + wordLength);
-        			//similarityIndex = ( LDistance <= wordLength ? (1 - ((float)LDistance/wordLength)) : 0);
-                    similarityIndex = 1 - ((float)LDistance/(Math.max(obsPhoneme.length(), vocalPhoneme.length())));
+        			//similarityIndex = ( LDistance <= wordLength ? (1 - ((double)LDistance/wordLength)) : 0);
+                    similarityIndex = 1 - ((double)LDistance/(Math.max(obsPhoneme.length(), vocalPhoneme.length())));
 					// --------------------------------------------------------
 					// Modified for adding convolution index
-					float conv = convolution_index(vocalPhoneme, obsPhoneme);
+					double conv = convolution_index(vocalPhoneme, obsPhoneme);
 					similarityIndex *= conv;
 					// --------------------------------------------------------
         			c.put(volWord, similarityIndex);
